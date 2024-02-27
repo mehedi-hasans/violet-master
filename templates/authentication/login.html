@@ -1,11 +1,57 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
-</head>
-<body>
-    <h1>login Page</h1>
-</body>
-</html>
+{% extends "includes/base.html" %}
+{% load static %}
+{% block main %}
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6 bg-white p-5 rounded shadow-lg">
+                <h2 class="text-center mb-4">Login to Violet</h2>
+
+                <form action="{% url 'loginPage' %}" method="POST" class="needs-validation" novalidate>
+                    {% csrf_token %}
+
+                    <div class="mb-3 row">
+                        <label for="{{ form.username.id_for_label }}" class="col-12 col-form-label">Username</label>
+                        <div class="col-12">
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-person"></i></span>
+                                {{ form.username }}
+                            </div>
+                            <div class="invalid-feedback">{{ form.username.errors }}</div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                        <label for="{{ form.password.id_for_label }}" class="col-12 col-form-label">Password</label>
+                        <div class="col-12">
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                                {{ form.password }}
+                            </div>
+                            <div class="invalid-feedback">{{ form.password.errors }}</div>
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-md-10 mb-3">
+                                <button type="submit" class="btn btn-dark btn-block">Login</button>
+                            </div>
+                            <div class="col-md-2">
+                                <a href="" class="btn  btn-block">
+                                    <img src="{% static 'img/logos/google-icon.png' %}" alt="Google Icon" class="google-icon bi" width="24" height="24">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                </form>
+
+                <div class="text-center mt-3">
+                    <p>New Customer? <a href="{% url 'signupPage' %}">Sign Up</a></p>
+                    <p><a href="">Forgot Password?</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
